@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Edusecure OLabs AI Chat - Sidebar Version</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Toggle button to open/close the sidebar -->
+  <button id="toggleSidebarBtn" class="toggle-btn">☰</button>
+
+  <!-- Sidebar Container -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-content">
+      <h1>Edusecure AI Olabs Chat</h1>
+
+      <!-- Women Health Mode Settings -->
+      <div>
+        <label for="modeSelect">Select Women Health Mode:</label>
+        <select id="modeSelect">
+          <option value="default">Default</option>
+          <option value="pregnant">Pregnant</option>
+          <option value="pcos">PCOS</option>
+          <option value="endometriosis">Endometriosis</option>
+          <option value="thyroid">Thyroid</option>
+        </select>
+        <button id="applyModeBtn">Apply Mode</button>
+      </div>
+
+      <!-- Health Questionnaire Form -->
+      <div class="questionnaire">
+        <h2>Health Questionnaire</h2>
+        <div>
+          <label for="userName">Name:</label>
+          <input type="text" id="userName" placeholder="Enter your name" />
+        </div>
+        <div>
+          <label for="userGender">Gender:</label>
+          <input type="text" id="userGender" placeholder="Enter your gender" />
+        </div>
+        <div>
+          <label for="userAge">Age:</label>
+          <input type="number" id="userAge" placeholder="Enter your age" />
+        </div>
+        <div>
+          <label for="userWeight">Weight (kg):</label>
+          <input type="number" id="userWeight" placeholder="Enter your weight" />
+        </div>
+        <div>
+          <label for="userHeight">Height (cm):</label>
+          <input type="number" id="userHeight" placeholder="Enter your height" />
+        </div>
+        <div>
+          <label for="userHistory">Past Medical History/Chronic Diseases:</label>
+          <textarea id="userHistory" rows="3" placeholder="Describe any past or chronic conditions"></textarea>
+        </div>
+        <button id="submitQuestionnaireBtn">Submit Questionnaire</button>
+      </div>
+
+      <!-- File Upload -->
+      <div>
+        <label for="fileInput">Upload a file:</label>
+        <input type="file" id="fileInput">
+        <button id="processFileBtn">Process File</button>
+      </div>
+
+      <!-- Language Selection -->
+      <div>
+        <label for="inputLang">Input Language (Speech Recognition):</label>
+        <select id="inputLang">
+          <option value="auto">Auto Detect</option>
+          <option value="en">English</option>
+          <option value="hi">Hindi</option>
+          <option value="bn">Bengali</option>
+          <option value="ml">Malayalam</option>
+          <option value="ta">Tamil</option>
+          <option value="te">Telugu</option>
+          <option value="gu">Gujarati</option>
+          <option value="mr">Marathi</option>
+          <option value="kn">Kannada</option>
+          <option value="or">Odia</option>
+          <option value="pa">Punjabi</option>
+          <option value="as">Assamese</option>
+          <option value="ur">Urdu</option>
+          <option value="ma">Maithili</option>
+          <option value="sa">Sanskrit</option>
+          <option value="sd">Sindhi</option>
+          <option value="ks">Kashmiri</option>
+          <option value="mni">Manipuri</option>
+          <option value="ne">Nepali</option>
+          <option value="kok">Konkani</option>
+        </select>
+      </div>
+      <div>
+        <label for="outputLang">Output Language (Gemini + TTS):</label>
+        <select id="outputLang">
+          <option value="en">English</option>
+          <option value="hi">Hindi</option>
+          <option value="bn">Bengali</option>
+          <option value="ml">Malayalam</option>
+          <option value="ta">Tamil</option>
+          <option value="te">Telugu</option>
+          <option value="gu">Gujarati</option>
+          <option value="mr">Marathi</option>
+          <option value="kn">Kannada</option>
+          <option value="or">Odia</option>
+          <option value="pa">Punjabi</option>
+          <option value="as">Assamese</option>
+          <option value="ur">Urdu</option>
+          <option value="ma">Maithili</option>
+          <option value="sa">Sanskrit</option>
+          <option value="sd">Sindhi</option>
+          <option value="ks">Kashmiri</option>
+          <option value="mni">Manipuri</option>
+          <option value="ne">Nepali</option>
+          <option value="kok">Konkani</option>
+        </select>
+      </div>
+
+      <!-- Health Risk Prediction (Optional) -->
+      <div>
+        <button id="predictRiskBtn">Predict Health Risk</button>
+      </div>
+    </div><!-- end sidebar-content -->
+  </aside>
+
+  <!-- Main Content Area with Chat Interface -->
+  <main class="main-content">
+    <div class="chat-container">
+      <!-- Unified Input Area (Text & Speech) -->
+      <div class="input-area">
+        <textarea id="chatInput" placeholder="Enter your question or describe your current health problem (text or speech)"></textarea>
+        <div class="button-group">
+          <button id="toggleRecordingBtn_main">Start Recording</button>
+          <button id="askButton_main">Submit</button>
+        </div>
+      </div>
+      
+      <!-- Output Area for Chatbot Response -->
+      <div class="output-area">
+        <label for="aiResponse">AI Response:</label>
+        <textarea id="aiResponse" readonly placeholder="AI response will appear here"></textarea>
+        <div class="button-group">
+          <button id="toggleSpeakBtn_main">Start Speaking</button>
+          <button id="pauseSpeakBtn_main">Pause Speech</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Firebase Libraries -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+
+  <!-- Your script.js -->
+  <script src="script.js"></script>
+
+  <!-- Simple script for toggling the sidebar -->
+  <script>
+    const toggleSidebarBtn = document.getElementById("toggleSidebarBtn");
+    const sidebar = document.getElementById("sidebar");
+    let sidebarOpen = true;
+    toggleSidebarBtn.addEventListener("click", () => {
+      sidebarOpen = !sidebarOpen;
+      if (sidebarOpen) {
+        sidebar.classList.remove("collapsed");
+      } else {
+        sidebar.classList.add("collapsed");
+      }
+    });
+  </script>
+</body>
+</html>
